@@ -105,7 +105,6 @@ const BankComparisonWebsite = () => {
     }
   ];
 
-  // 修复：移除 banksData 依赖项，因为它是静态数据
   const filteredBanks = useMemo(() => {
     return banksData.filter(bank => {
       const matchesSearch = bank.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -128,7 +127,7 @@ const BankComparisonWebsite = () => {
       
       return matchesSearch && matchesThreshold && matchesFee && matchesDowngrade && matchesCountries;
     });
-  }, [searchQuery, selectedFilters]);
+  }, [searchQuery, selectedFilters, banksData]);
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
@@ -456,9 +455,9 @@ const BankComparisonWebsite = () => {
             <div>
               <h4 className="text-lg font-semibold mb-4">快速链接</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><button onClick={() => handleNavClick('guide')} className="hover:text-white bg-transparent border-none cursor-pointer text-left p-0">开户指南</button></li>
-                <li><button onClick={() => handleNavClick('calculator')} className="hover:text-white bg-transparent border-none cursor-pointer text-left p-0">费用计算器</button></li>
-                <li><button onClick={() => handleNavClick('faq')} className="hover:text-white bg-transparent border-none cursor-pointer text-left p-0">常见问题</button></li>
+                <li><button onClick={() => handleNavClick('guide')} className="hover:text-white bg-transparent border-none cursor-pointer text-left p-0 text-gray-400">开户指南</button></li>
+                <li><button onClick={() => handleNavClick('calculator')} className="hover:text-white bg-transparent border-none cursor-pointer text-left p-0 text-gray-400">费用计算器</button></li>
+                <li><button onClick={() => handleNavClick('faq')} className="hover:text-white bg-transparent border-none cursor-pointer text-left p-0 text-gray-400">常见问题</button></li>
               </ul>
             </div>
             <div>
