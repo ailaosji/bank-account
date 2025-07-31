@@ -105,7 +105,7 @@ const BankComparisonWebsite = () => {
     }
   ];
 
-  // 修复：添加 banksData 作为依赖项
+  // 修复：移除 banksData 依赖项，因为它是静态数据
   const filteredBanks = useMemo(() => {
     return banksData.filter(bank => {
       const matchesSearch = bank.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -128,7 +128,7 @@ const BankComparisonWebsite = () => {
       
       return matchesSearch && matchesThreshold && matchesFee && matchesDowngrade && matchesCountries;
     });
-  }, [searchQuery, selectedFilters]); // 移除 banksData 依赖项，因为它是静态的
+  }, [searchQuery, selectedFilters]);
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
