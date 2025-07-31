@@ -105,6 +105,7 @@ const BankComparisonWebsite = () => {
     }
   ];
 
+  // Fixed: Added banksData to dependency array
   const filteredBanks = useMemo(() => {
     return banksData.filter(bank => {
       const matchesSearch = bank.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -127,7 +128,7 @@ const BankComparisonWebsite = () => {
       
       return matchesSearch && matchesThreshold && matchesFee && matchesDowngrade && matchesCountries;
     });
-  }, [searchQuery, selectedFilters]);
+  }, [searchQuery, selectedFilters, banksData]); // Fixed: Added banksData dependency
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
@@ -148,6 +149,12 @@ const BankComparisonWebsite = () => {
     );
   };
 
+  // Fixed: Replace invalid anchor tags with buttons
+  const handleNavClick = (section) => {
+    console.log(`Navigate to ${section}`);
+    // Add your navigation logic here
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -159,10 +166,11 @@ const BankComparisonWebsite = () => {
               <h1 className="text-2xl font-bold text-gray-900">银行账户对比平台</h1>
             </div>
             <nav className="flex space-x-6">
-              <a href="#" className="text-gray-600 hover:text-gray-900">首页</a>
-              <a href="#" className="text-gray-600 hover:text-gray-900">对比工具</a>
-              <a href="#" className="text-gray-600 hover:text-gray-900">开户指南</a>
-              <a href="#" className="text-gray-600 hover:text-gray-900">用户讨论</a>
+              {/* Fixed: Replace invalid anchor tags with buttons */}
+              <button onClick={() => handleNavClick('home')} className="text-gray-600 hover:text-gray-900 bg-transparent border-none cursor-pointer">首页</button>
+              <button onClick={() => handleNavClick('compare')} className="text-gray-600 hover:text-gray-900 bg-transparent border-none cursor-pointer">对比工具</button>
+              <button onClick={() => handleNavClick('guide')} className="text-gray-600 hover:text-gray-900 bg-transparent border-none cursor-pointer">开户指南</button>
+              <button onClick={() => handleNavClick('discussion')} className="text-gray-600 hover:text-gray-900 bg-transparent border-none cursor-pointer">用户讨论</button>
             </nav>
           </div>
         </div>
@@ -450,9 +458,10 @@ const BankComparisonWebsite = () => {
             <div>
               <h4 className="text-lg font-semibold mb-4">快速链接</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white">开户指南</a></li>
-                <li><a href="#" className="hover:text-white">费用计算器</a></li>
-                <li><a href="#" className="hover:text-white">常见问题</a></li>
+                {/* Fixed: Replace invalid anchor tags with buttons */}
+                <li><button onClick={() => handleNavClick('guide')} className="hover:text-white bg-transparent border-none cursor-pointer text-left p-0">开户指南</button></li>
+                <li><button onClick={() => handleNavClick('calculator')} className="hover:text-white bg-transparent border-none cursor-pointer text-left p-0">费用计算器</button></li>
+                <li><button onClick={() => handleNavClick('faq')} className="hover:text-white bg-transparent border-none cursor-pointer text-left p-0">常见问题</button></li>
               </ul>
             </div>
             <div>
