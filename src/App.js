@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Filter, Star, ChevronDown, ChevronUp, MessageCircle, Users, Globe, CreditCard, DollarSign, AlertCircle } from 'lucide-react';
+import { Search, Filter, Star, ChevronDown, ChevronUp, MessageCircle, Users, Globe, CreditCard, DollarSign, AlertCircle, Youtube, ExternalLink } from 'lucide-react';
 
 const BankComparisonWebsite = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -105,7 +105,7 @@ const BankComparisonWebsite = () => {
     }
   ];
 
-  // Fixed: Added banksData to dependency array
+  // 修复：添加 banksData 作为依赖项
   const filteredBanks = useMemo(() => {
     return banksData.filter(bank => {
       const matchesSearch = bank.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -128,7 +128,7 @@ const BankComparisonWebsite = () => {
       
       return matchesSearch && matchesThreshold && matchesFee && matchesDowngrade && matchesCountries;
     });
-  }, [searchQuery, selectedFilters, banksData]); // Fixed: Added banksData dependency
+  }, [searchQuery, selectedFilters]); // 移除 banksData 依赖项，因为它是静态的
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
@@ -149,7 +149,6 @@ const BankComparisonWebsite = () => {
     );
   };
 
-  // Fixed: Replace invalid anchor tags with buttons
   const handleNavClick = (section) => {
     console.log(`Navigate to ${section}`);
     // Add your navigation logic here
@@ -166,7 +165,6 @@ const BankComparisonWebsite = () => {
               <h1 className="text-2xl font-bold text-gray-900">银行账户对比平台</h1>
             </div>
             <nav className="flex space-x-6">
-              {/* Fixed: Replace invalid anchor tags with buttons */}
               <button onClick={() => handleNavClick('home')} className="text-gray-600 hover:text-gray-900 bg-transparent border-none cursor-pointer">首页</button>
               <button onClick={() => handleNavClick('compare')} className="text-gray-600 hover:text-gray-900 bg-transparent border-none cursor-pointer">对比工具</button>
               <button onClick={() => handleNavClick('guide')} className="text-gray-600 hover:text-gray-900 bg-transparent border-none cursor-pointer">开户指南</button>
@@ -450,7 +448,7 @@ const BankComparisonWebsite = () => {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <h4 className="text-lg font-semibold mb-4">银行账户对比平台</h4>
               <p className="text-gray-400">帮助用户找到最适合的银行账户，做出明智的金融选择。</p>
@@ -458,11 +456,29 @@ const BankComparisonWebsite = () => {
             <div>
               <h4 className="text-lg font-semibold mb-4">快速链接</h4>
               <ul className="space-y-2 text-gray-400">
-                {/* Fixed: Replace invalid anchor tags with buttons */}
                 <li><button onClick={() => handleNavClick('guide')} className="hover:text-white bg-transparent border-none cursor-pointer text-left p-0">开户指南</button></li>
                 <li><button onClick={() => handleNavClick('calculator')} className="hover:text-white bg-transparent border-none cursor-pointer text-left p-0">费用计算器</button></li>
                 <li><button onClick={() => handleNavClick('faq')} className="hover:text-white bg-transparent border-none cursor-pointer text-left p-0">常见问题</button></li>
               </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">关注我们</h4>
+              <div className="space-y-2">
+                <a href="https://www.youtube.com/@laosji" target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-400 hover:text-white transition-colors">
+                  <Youtube className="w-5 h-5 mr-2" />
+                  YouTube
+                </a>
+                <a href="https://laosji.net/" target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-400 hover:text-white transition-colors">
+                  <ExternalLink className="w-5 h-5 mr-2" />
+                  官网
+                </a>
+                <a href="https://x.com/laosji_fuli" target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-400 hover:text-white transition-colors">
+                  <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                  X (Twitter)
+                </a>
+              </div>
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-4">联系我们</h4>
