@@ -12,7 +12,7 @@ const BankComparisonWebsite = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [expandedBank, setExpandedBank] = useState(null);
 
-  const banksData = [
+  const banksData = useMemo(() => [
     {
       id: 1,
       name: '渣打银行',
@@ -103,7 +103,7 @@ const BankComparisonWebsite = () => {
       specialNotes: '香港/新加坡账户律师见证费500元',
       color: 'from-indigo-500 to-indigo-600'
     }
-  ];
+  ], []);
 
   const filteredBanks = useMemo(() => {
     return banksData.filter(bank => {
@@ -463,20 +463,29 @@ const BankComparisonWebsite = () => {
             <div>
               <h4 className="text-lg font-semibold mb-4">关注我们</h4>
               <div className="space-y-2">
-                <a href="https://www.youtube.com/@laosji" target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-400 hover:text-white transition-colors">
+                <button 
+                  onClick={() => window.open('https://www.youtube.com/@laosji', '_blank')} 
+                  className="flex items-center text-gray-400 hover:text-white transition-colors bg-transparent border-none cursor-pointer text-left p-0"
+                >
                   <Youtube className="w-5 h-5 mr-2" />
                   YouTube
-                </a>
-                <a href="https://laosji.net/" target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-400 hover:text-white transition-colors">
+                </button>
+                <button 
+                  onClick={() => window.open('https://laosji.net/', '_blank')} 
+                  className="flex items-center text-gray-400 hover:text-white transition-colors bg-transparent border-none cursor-pointer text-left p-0"
+                >
                   <ExternalLink className="w-5 h-5 mr-2" />
                   官网
-                </a>
-                <a href="https://x.com/laosji_fuli" target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-400 hover:text-white transition-colors">
+                </button>
+                <button 
+                  onClick={() => window.open('https://x.com/laosji_fuli', '_blank')} 
+                  className="flex items-center text-gray-400 hover:text-white transition-colors bg-transparent border-none cursor-pointer text-left p-0"
+                >
                   <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                   </svg>
                   X (Twitter)
-                </a>
+                </button>
               </div>
             </div>
             <div>
